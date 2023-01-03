@@ -109,7 +109,7 @@ section {
 .align-items-center {
   align-items: center;
 }
-.hidden {
+hidden {
   display: none !important;
 }
 .sec-padding {
