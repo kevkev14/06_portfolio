@@ -109,7 +109,7 @@ section {
 .align-items-center {
   align-items: center;
 }
-hidden {
+.hidden {
   display: none !important;
 }
 .sec-padding {
@@ -461,4 +461,27 @@ Portfolio popup Sektion
 .pp-body .general-info li a {
   text-transform: lowercase;
   color: var(--main-color);
+}
+/* --------------
+Kontakt Sektion
+---------------*/
+.contact-form,
+.contact-info {
+  width: 50%;
+  padding: 0 15px;
+}
+.contact-form .input-group {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.contact-form .input-group {
+  display: block;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 16;
+  background-color: var(--white-alpha-25);
 }
