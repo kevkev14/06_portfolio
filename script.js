@@ -44,10 +44,7 @@ document.addEventListener("click", (e) => {
 //FØR VISTE DEN KUN DET SAMME PORTFOLIO KORT PÅ HVER KNAP
 //DET PROJECT SOM BLIVER KLIKKET PÅ VISER DET TILSVARENDE PROJEKT PÅ SKÆRMEN
 function portfolioItemDetails(portfolioItem) {
-  /* -- Gør så thumbnail "src" billedet er det rigtige -- */
   document.querySelector(".pp-thumbnail img").src = portfolioItem.querySelector(".portfolio-item-thumbnail img").src;
-  /* -- Gør så html teksten H3 på kort "innerHTML" er det rigtige -- */
   document.querySelector(".pp-header h3").innerHTML = portfolioItem.querySelector(".portfolio-item-title").innerHTML;
-  /* -- Gør så html teksten body på kort "innerHTML" er det rigtige -- */
   document.querySelector(".pp-body").innerHTML = portfolioItem.querySelector(".portfolio-item-details").innerhtml;
 }
