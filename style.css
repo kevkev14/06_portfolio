@@ -418,6 +418,12 @@ Portfolio popup Sektion
   border: 1px solid var(--white-alpha-40);
   backdrop-filter: var(--backdrop-filter-blur);
   opacity: 0;
+  transform: scale(0.9);
+}
+.portfolio-popup.open .pp-content {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.5s ease;
 }
 .pp-header {
   position: relative;
