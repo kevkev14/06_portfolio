@@ -12,8 +12,8 @@ Variabler
   --blue-dark: #18293c;
   --orange: #ffa500;
   --green-yellow: #cddc39;
-  --pink-light: #efa2b4;
-  --cyan-light: #aef1ee;
+  --pink-light: #fccb90;
+  --cyan-light: #d57eea;
   --white: #ffffff;
   --white-alpha-40: rgba(255, 255, 255, 0.4);
   --white-alpha-25: rgba(255, 255, 255, 0.25);
@@ -210,7 +210,7 @@ Animation keyframes til animationer
     opacity: 0;
   }
 }
-/*Overlay til brug af at man ikke kan klikke flere gange per klik*/
+/*Overlay til brug af at man ikke kan klikke flere gange per sektion*/
 .overlay {
   position: fixed;
   left: 0;
