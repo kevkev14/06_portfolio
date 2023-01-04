@@ -1,11 +1,11 @@
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Fonte
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Variabler
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 :root {
   --main-color: #e02f6b;
   --blue: #0000ff;
@@ -20,22 +20,19 @@ Variabler
   --backdrop-filter-blur: blur(5px);
 }
 
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Overordnet
----------------*/
-
+------------------------------------------------------------------------------------------------------------------------------ */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   outline: none;
 }
-
 ::before,
 ::after {
   box-sizing: border-box;
 }
-
 body {
   min-height: 100vh;
   background-image: linear-gradient(to bottom right, var(--pink-light), var(--cyan-light));
@@ -47,7 +44,7 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   -webkit-top-highlight-color: transparent;
-  padding: 5vh 15px;
+  padding: 35px 15px;
 }
 body.hide-scrolling {
   overflow-y: hidden;
@@ -86,14 +83,21 @@ ul {
 section {
   background-color: var(--white-alpha-25);
   border: 1px solid var(--white-alpha-40);
-  min-height: 90vh;
+  min-height: calc(100vh - 70px);
   border-radius: 30px;
   backdrop-filter: var(--backdrop-filter-blur);
+  display: none;
 }
+section.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
 .main {
   max-width: 1200px;
   margin: auto;
   transition: all 0.5s ease-in-out;
+  position: relative;
 }
 .main.fade-out {
   opacity: 0;
@@ -115,9 +119,12 @@ section {
 .sec-padding {
   padding: 80px 0;
 }
-/* --------------
+.flex-end {
+  justify-content: flex-end;
+}
+/* ------------------------------------------------------------------------------------------------------------------------------
 Section Titel
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 .section-title {
   padding: 0 15px;
   width: 100%;
@@ -128,9 +135,9 @@ Section Titel
   font-size: 40px;
   text-transform: capitalize;
 }
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Custom Scrollbar
----------------*/
+------------------------------------------------------------------------------------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -140,13 +147,14 @@ Custom Scrollbar
 ::-webkit-scrollbar-thumb {
   background-color: var(--main-color);
 }
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Knapper (BTN)
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 button {
   font-family: inherit;
   user-select: none;
 }
+/*Denne er den overordnede design af knappen der går igen flere steder på siden med hover effekt og farve skift*/
 .btn {
   line-height: 1.5;
   background-color: var(--white-alpha-25);
@@ -183,12 +191,198 @@ button {
 .btn:hover {
   color: var(--white);
 }
-/* --------------
-Home sektionen
----------------*/
-.home-section {
+/* ------------------------------------------------------------------------------------------------------------------------------
+Animation keyframes til animationer
+------------------------------------------------------------------------------------------------------------------------------ */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*Overlay til brug af at man ikke kan klikke flere gange per klik*/
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  z-index: 200;
+  visibility: hidden;
+}
+.overlay.active {
+  visibility: visible;
+}
+
+/*Placering af selve knap boksen*/
+.header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 20px 0 0;
+  margin: 0 15px;
+}
+.header.active {
+  position: fixed;
+  top: 35px;
+  padding: 20px 15px;
+}
+.header.active .container {
+  max-width: 1200px;
+  margin: auto;
+}
+/*Denne er placeringen af cirklen burgerbaren er placeret i*/
+.header .nav-toggler {
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--white-alpha-25);
+  border: 1px solid var(--white-alpha-40);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 15px;
+  z-index: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.header .nav-toggler.hide {
+  opacity: 0;
+  transition: none;
+}
+.header .nav-toggler span {
+  height: 2px;
+  width: 24px;
+  background-color: var(--main-color);
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+.header.active .nav-toggler span {
+  background-color: transparent;
+}
+/*Dette giver animations fornemmelsen på burgerbaren*/
+.header .nav-toggler span::before,
+.header .nav-toggler span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-color);
+  transition: all 0.3s ease;
+}
+/*Disse to gør så placeringen af stregen i midten bevæger sig op og ned ad Y aksen*/
+.header .nav-toggler span::before {
+  left: 0;
+  transform: translateY(-8px);
+}
+.header.active .nav-toggler span::before {
+  transform: rotate(45deg);
+}
+.header .nav-toggler span::after {
+  right: 0;
+  transform: translateY(8px);
+}
+.header.active .nav-toggler span::after {
+  transform: rotate(-45deg);
+}
+/* Denne gør så stregerne bliver halveret i width hvilket giver en animation fornemmelse */
+/* Transitionen kommer fra all ease henover denne */
+.header:not(.active) .nav-toggler:hover span::before,
+.header:not(.active) .nav-toggler:hover span::after {
+  width: 50%;
+}
+.header .nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 35px 15px;
+  overflow-y: auto;
+  visibility: hidden;
+}
+.header.active .nav {
+  visibility: visible;
+}
+/*Formatering af selve boksen inde i burgermenuen*/
+.header .nav-inner {
+  min-height: calc(100vh - 70px);
+  max-width: 1200px;
+  margin: auto;
+  background-color: var(--white-alpha-25);
+  border: 1px solid var(--white-alpha-40);
+  backdrop-filter: var(--backdrop-filter-blur);
+  padding: 50px 0;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.header.active .nav-inner {
+  opacity: 1;
+}
+/*Formatering af alt tekst og links i menuen*/
+.header .nav-inner ul li {
+  text-align: center;
+}
+.header .nav-inner ul li a {
+  font-size: 40px;
+  text-transform: capitalize;
+  color: var(--blue-dark);
+  display: block;
+  font-weight: 500;
+  padding: 8px 15px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.header .nav-inner ul li a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  width: 0%;
+  background-color: var(--white-alpha-25);
+  z-index: -1;
+  transition: width 0.5s ease;
+}
+.header .nav-inner ul li a:hover::before {
+  width: 100%;
+}
+
+.header .nav-inner ul li a:hover {
+  color: var(--main-color);
+}
+/* ------------------------------------------------------------------------------------------------------------------------------
+Home sektionen
+------------------------------------------------------------------------------------------------------------------------------ */
+.home-section {
   padding: 120px 0;
+}
+.home-section.active {
+  display: flex;
+}
+/*Gør så at sektionen ved åben tab i javascript fader*/
+section.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
 }
 .home-text,
 .home-img {
@@ -222,9 +416,9 @@ Home sektionen
   width: 100%;
   border-radius: 50%;
 }
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 About Sektionen
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 .about-img {
   width: 40%;
   padding: 0 15px;
@@ -248,6 +442,7 @@ About Sektionen
   font-size: 20px;
   margin: 20px 0;
 }
+/*Formatering af skills boksene*/
 .about-text .skills {
   display: flex;
   flex-wrap: wrap;
@@ -322,6 +517,7 @@ About Sektionen
 .about-text .tab-content.active {
   display: block;
 }
+/*Disse to er prikken som man ser ud fra experience og education sektionerne*/
 .about-text .timeline-item {
   margin-bottom: 30px;
   position: relative;
@@ -340,12 +536,14 @@ About Sektionen
 .about-text .timeline-item:last-child {
   margin-bottom: 0px;
 }
+/*Ændring af farve på dato*/
 .about-text .timeline-item .date {
   display: block;
   color: var(--main-color);
   font-weight: 400;
   margin: 0 0 10px;
 }
+/*Generel formatering af teksten*/
 .about-text .timeline-item h4 {
   font-size: 18px;
   text-transform: capitalize;
@@ -357,9 +555,9 @@ About Sektionen
 .about-text .btn {
   margin: 0 15px 15px 0;
 }
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Portfolio Sektion
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 .portfolio-section {
   padding-bottom: 50px;
 }
@@ -385,9 +583,9 @@ Portfolio Sektion
 .portfolio-item-details {
   display: none;
 }
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Portfolio popup Sektion
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 .portfolio-popup {
   position: fixed;
   left: 0;
@@ -409,6 +607,7 @@ Portfolio popup Sektion
   align-items: center;
   justify-content: center;
 }
+/*Størrelse af popup siden samt formatering af baggrunden gjort blurry så den "fader" væk*/
 .pp-content {
   background-color: var(--white-alpha-25);
   padding: 30px;
@@ -425,6 +624,7 @@ Portfolio popup Sektion
   transform: scale(1);
   transition: all 0.5s ease;
 }
+/*Generel resizing af alt pp relateret eks. img, h3, li osv forneden*/
 .pp-header {
   position: relative;
 }
@@ -462,9 +662,9 @@ Portfolio popup Sektion
   text-transform: lowercase;
   color: var(--main-color);
 }
-/* --------------
+/* ------------------------------------------------------------------------------------------------------------------------------
 Kontakt Sektion
----------------*/
+------------------------------------------------------------------------------------------------------------------------------ */
 .contact-form,
 .contact-info {
   width: 50%;
@@ -474,7 +674,14 @@ Kontakt Sektion
   width: 100%;
   margin-bottom: 30px;
 }
-.contact-form .input-group {
+/*Placeholder tekst bliver gjort til tilsvarende farve*/
+.contact-form .input-control::placeholder {
+  color: var(--blue-dark);
+  opacity: 0.8;
+  font-weight: 300;
+}
+/*Generel css design af alle tekstbokse til input af personlig info*/
+.contact-form .input-control {
   display: block;
   width: 100%;
   height: 50px;
@@ -482,6 +689,50 @@ Kontakt Sektion
   border: none;
   font-family: inherit;
   font-weight: 400;
-  font-size: 16;
+  font-size: 16px;
   background-color: var(--white-alpha-25);
+  padding: 0 20px;
+  color: var(--blue-dark);
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+/*Border til alle boksene gjort mere hvide*/
+.contact-form .input-control {
+  border-color: var(--white-alpha-40);
+}
+/*Samme som før, bare med textarea gjort større end de andre bokse*/
+.contact-form textarea.input-control {
+  height: 120px;
+  resize: none;
+  padding-top: 15px;
+}
+/*Gennerel padding og margin af contact div*/
+.contact-info-item {
+  margin: 0 0 30px;
+  padding: 0 0 0 20px;
+}
+/*Tekst transformation af alle H3 tags i contact-info-item ID*/
+.contact-info-item h3 {
+  font-size: 20px;
+  text-transform: capitalize;
+  margin: 0 0 5px;
+}
+/*Tekst transformation af alle A tags i contact-info-item ID*/
+.contact-info-item .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  background-color: var(--white-alpha-25);
+  border: 1px solid var(--white-alpha-25);
+  color: var(--main-color);
+  border-radius: 50%;
+  margin: 6px 4px 0 0;
+  transition: all 0.3s ease;
+}
+/*Hover effekt af social knapperne*/
+.contact-info-item .social-links a:hover {
+  color: var(--white);
+  background-color: var(--main-color);
 }

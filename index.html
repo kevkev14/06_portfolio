@@ -8,18 +8,44 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Overlay Start -->
+    <div class="overlay"></div>
+    <!-- Overlay End -->
+
     <!-- Hele Main Start -->
     <div class="main">
+      <!-- Header Start -->
+      <header class="header">
+        <div class="container">
+          <div class="row flex-end">
+            <button type="button" class="nav-toggler">
+              <span></span>
+            </button>
+            <nav class="nav">
+              <div class="nav-inner">
+                <ul>
+                  <li><a href="#home" class="nav-item link-item">home</a></li>
+                  <li><a href="#about" class="nav-item link-item">about</a></li>
+                  <li><a href="#portfolio" class="nav-item link-item">portfolio</a></li>
+                  <li><a href="#contact" class="nav-item link-item">contact</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <!-- Header End -->
+
       <!--Home Section Start-->
-      <section class="home-section align-items-center hidden">
+      <section class="home-section align-items-center active" id="home">
         <div class="container">
           <div class="row align-items-center">
             <div class="home-text">
               <p>Hello, I'm</p>
               <h1>Kevin Schwaner Engels</h1>
               <h2>Student - Marketer - Designer</h2>
-              <a href="#" class="btn">About me</a>
-              <a href="#" class="btn">Portfolio</a>
+              <a href="#about" class="btn link-item">About me</a>
+              <a href="#portfolio" class="btn link-item">Portfolio</a>
             </div>
             <div class="home-img">
               <div class="img-box">
@@ -32,7 +58,7 @@
       <!--Home Section End-->
 
       <!--About Section Start-->
-      <section class="about-section sec-padding hidden">
+      <section class="about-section sec-padding" id="about">
         <div class="container">
           <div class="row">
             <div class="section-title">
@@ -134,8 +160,8 @@
               </div>
               <!-- Experience End -->
 
-              <a href="#" class="btn">Download CV</a>
-              <a href="#" class="btn">Contact me</a>
+              <a href="#cvenglish.pdf" target="_blank" class="btn">Download CV</a>
+              <a href="#contact" class="btn link-item">Contact me</a>
             </div>
           </div>
         </div>
@@ -143,7 +169,7 @@
       <!--About Section End-->
 
       <!--Portfolio Section Start-->
-      <section class="portfolio-section sec-padding hidden">
+      <section class="portfolio-section sec-padding" id="portfolio">
         <div class="container">
           <div class="row">
             <div class="section-title">
@@ -301,7 +327,7 @@
       <!--Portfolio Section End-->
 
       <!--Contact Section Start-->
-      <section class="contact-section sec-padding">
+      <section class="contact-section sec-padding" id="contact">
         <div class="container">
           <div class="row">
             <div class="section-title">
@@ -309,26 +335,27 @@
             </div>
           </div>
           <div class="row">
-            <div class="contact-form"></div>
-            <form>
-              <div class="row">
-                <div class="input-group">
-                  <input type="text" placeholder="Name" class="input-control" required />
+            <div class="contact-form">
+              <form>
+                <div class="row">
+                  <div class="input-group">
+                    <input type="text" placeholder="Name" class="input-control" required />
+                  </div>
+                  <div class="input-group">
+                    <input type="text" placeholder="E-mail" class="input-control" required />
+                  </div>
+                  <div class="input-group">
+                    <input type="text" placeholder="Subject" class="input-control" required />
+                  </div>
+                  <div class="input-group">
+                    <textarea placeholder="Message" class="input-control" required></textarea>
+                  </div>
+                  <div class="submit-btn">
+                    <button type="submit" class="btn">Send Message</button>
+                  </div>
                 </div>
-                <div class="input-group">
-                  <input type="text" placeholder="E-mail" class="input-control" required />
-                </div>
-                <div class="input-group">
-                  <input type="text" placeholder="Subject" class="input-control" required />
-                </div>
-                <div class="input-group">
-                  <textarea placeholder="Message" class="input-control" required></textarea>
-                </div>
-                <div class="submit-btn">
-                  <button type="submit" class="btn">Send Message</button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
             <div class="contact-info">
               <div class="contact-info-item">
                 <h3>E-mail</h3>
